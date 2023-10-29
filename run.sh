@@ -1,3 +1,3 @@
-gradle -p backend/ bootJar
+sudo backend/gradlew -p backend/ bootJar
 sudo docker compose build
 sudo docker compose up
