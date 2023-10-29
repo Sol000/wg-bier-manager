@@ -3,37 +3,20 @@ services:
     image: 'mongodb/mongodb-community-server:latest'
     ports:
       - "27017:27017"
-  wg-backend:
-    build: .
+
+  backend:
+    build: ./backend/
     ports:
       - "8080:8080"
+
+  ui:
+    build: ./forntend/
+    ports:
+      - "5173:5173"
 
   nginx:
     image: nginx
     ports:
       - "80:80"
     volumes:
-      - ./nginxConfig:/etc/nginx/conf.d
-
-
-# -------- Not working.... -----------------
-#  nginx-proxy:
-#    image: "fsouza/docker-ssl-proxy"
-#    ports:
-#      - 443:443
-#    environment:
-#      - DOMAIN=127.0.0.1 #change this to 85.251.54.125 on server
-#      - TARGET_PORT=8080
-#      - TARGET_HOST=wg-backend
-#      - SSL_PORT=443
-#    volumes:
-#      - cert:/etc/ssl/shared-ca
-#
-#volumes:
-#  cert:
-
-# ------------ Samuel.... ------------------
-#  wg-ui:
-#    build: ../wg-bier-app-ui/
-#    ports:
-#      - "5173:5173"
+      - ./proxy:/etc/nginx/conf.d

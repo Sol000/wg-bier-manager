@@ -1,30 +1,26 @@
-
 ___
-### TODO:
-- mby use login-system?
-- use a logger
-- Add QR-Code generation for banking after invoce
-___
-### Quick Guide:
+## Quick Guide:
 
-Must be installed:
-- docker + compose plugin
-- Docker Desktop is nice to have.
-- Intellij to build the .jar file
-  - openjdk-21 installed
-  - gradle > 6.0
+### Prerequesits
+- nodejs
+- [bun](https://bun.sh/)
+- docker + compose plugin (Docker Desktop is nice to have)
+- openjdk-21
+- gradle > 6.0
 
-    
-First of all you have to build the .jar file. In Intellij look on the right -> click on gradle -> tasks -> build -> build.
-The file you are looking for is in `build/libs/..` !! leave it there !!
+### Starting the application
 
-Next open a terminal in the project root and type
+    chmod +x run.sh
+    ./run.sh
 
-    docker compose build
+### Port-Mapping
+mongodb --> `27017` \
+backend ----> `8080` \
+frontend ----> `5173` \
+proxy --------> `80`
 
-after that 
+> If you start the application stack locally all the ports are available on `http://localhost`
 
-     docker compose up 
-
+> On server only port `80` is reachable
 
 
