@@ -21,4 +21,4 @@ services:
       - "443:443"
     volumes:
       - ./proxy:/etc/nginx/conf.d
-      - ~/.ssl:~/.ssl
+      - /etc/ssl:/etc/ssl
