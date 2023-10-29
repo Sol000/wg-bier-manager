@@ -18,5 +18,7 @@ services:
     image: nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./proxy:/etc/nginx/conf.d
+      - ~/.ssl:~/.ssl
