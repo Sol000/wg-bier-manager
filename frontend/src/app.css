@@ -1,0 +1,16 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+
+	--text-color: #d6dfd2;
+	--text-color-emphasized: #75956a;
+
+	--border-bright: #6a865f;
+	--border-dark: #232d20;
+	--border-divider: #3b4b35;
+
+	--background-page: #0c0f0b;
+	--background-surface: #2f3c2a;
+	--background-container: #0c0f0b;
+}
