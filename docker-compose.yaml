@@ -23,4 +23,4 @@ services:
       - ./proxy:/etc/nginx/conf.d
       - /etc/ssl:/etc/ssl
     profiles:
-      - local
+      - prod

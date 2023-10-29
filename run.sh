@@ -1,3 +1,9 @@
-sudo backend/gradlew -p backend/ bootJar
+#!/bin/bash
+
+gradle -p backend/ bootJar
 sudo docker compose build
-sudo docker compose up
+if [ "$1" == "--prod" ]; then
+  sudo docker compose --profile prod up
+else
+  sudo docker compose up
+fi
