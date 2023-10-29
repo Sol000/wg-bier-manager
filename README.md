@@ -16,11 +16,9 @@ ___
 
 > for hard reset (erases DB) use `./run.sh --prod --hard-reset`
 
-#### Locally
+#### Locally (without Ngingx)
     chmod +x run.sh
     ./run.sh 
-
-> for hard reset (erases DB) use `./run.sh --hard-reset`
 
 ### Port-Mapping
 mongodb --> `27017` \
