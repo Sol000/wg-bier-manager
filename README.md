@@ -10,8 +10,15 @@ ___
 
 ### Starting the application
 
+#### On Server
     chmod +x run.sh
     ./run.sh --prod
+
+> for hard reset (erases DB) use `./run.sh --prod --hard-reset`
+
+#### Locally (without Ngingx)
+    chmod +x run.sh
+    ./run.sh 
 
 ### Port-Mapping
 mongodb --> `27017` \
