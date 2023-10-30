@@ -1,20 +1,35 @@
-<script>
-	import SevenSegNum from '$lib/components/seven-seg/seven-seg-num.svelte';
+<script lang="ts">
+	import ButtonLink from '$lib/components/button-link.svelte';
 	import Button from '$lib/components/button.svelte';
-	import Window from '$lib/components/window.svelte';
 	import Divider from '$lib/components/divider.svelte';
 	import LoadingWindow from '$lib/components/loading-window.svelte';
-
-	export let data;
+	import SevenSegNum from '$lib/components/seven-seg/seven-seg-num.svelte';
+	import Window from '$lib/components/window.svelte';
+	import { playerStore } from '../stores/player';
+	import { seasonStore } from '../stores/season';
 </script>
 
-{#await data.streamed.currentSeason}
+{#if $seasonStore === undefined}
 	<LoadingWindow />
-{:then currentSeason}
+	<Button
+		onClick={() => {
+			playerStore.refreshPlayers();
+			seasonStore.refreshSeason();
+		}}>Refresh</Button
+	>
+{:else}
 	<Window>
-		<h1 slot="header" class="season-heading">&gt; Season~{currentSeason.number}</h1>
+		<div slot="header" class="season-heading">
+			<h1>&gt; Season~{$seasonStore.number}</h1>
+			<Button
+				onClick={() => {
+					playerStore.refreshPlayers();
+					seasonStore.refreshSeason();
+				}}>Refresh</Button
+			>
+		</div>
 		<div slot="content">
-			{#each currentSeason.playerList as player, idx}
+			{#each $seasonStore.playerList as player, idx}
 				<div class="scoreboard-entry">
 					<span class="place">{idx + 1}. </span>
 					<span class="player-label">{player.nickname}</span>
@@ -22,10 +37,10 @@
 						<SevenSegNum input={player.seasonBeerCount} digitCount={4} />
 					</div>
 					<div class="operations">
-						<Button onClick={() => undefined}>
+						<Button onClick={() => playerStore.increasePoints(player)}>
 							<div class="btn-txt incrementer">+</div>
 						</Button>
-						<Button onClick={() => undefined}>
+						<Button onClick={() => playerStore.decreasePoints(player)}>
 							<div class="btn-txt incrementer">-</div>
 						</Button>
 					</div>
@@ -34,23 +49,21 @@
 			{/each}
 		</div>
 		<div slot="footer">
-			<Button onClick={() => undefined}>
+			<ButtonLink href="/players">
 				<div class="btn-txt new-player-btn-content">Add a new Player</div>
-			</Button>
+			</ButtonLink>
+			<ButtonLink href="/season">
+				<div class="btn-txt new-player-btn-content">Start new season</div>
+			</ButtonLink>
 		</div>
 	</Window>
-{:catch error}
-	<Window>
-		<h1 slot="header">Error Loading Current Season</h1>
-		<code slot="content">{JSON.stringify(error)}</code>
-	</Window>
-{/await}
+{/if}
 
 <style scoped>
 	.season-heading {
-		margin: 0;
+		display: flex;
+		justify-content: space-between;
 	}
-
 	.scoreboard-entry {
 		display: flex;
 		align-items: center;
@@ -88,5 +101,8 @@
 	}
 	.new-player-btn-content {
 		margin: 8px 32px;
+	}
+	.footer {
+		display: flex;
 	}
 </style>

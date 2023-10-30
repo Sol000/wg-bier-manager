@@ -1,18 +1,21 @@
 <script lang="ts">
 	import Button from '$lib/components/button.svelte';
-	import Input from '$lib/components/input.svelte';
 	import Window from '$lib/components/window.svelte';
+	import { playerStore } from '../../stores/player';
 
-	const addPlayer = () => undefined;
+	let nameInput = '';
 </script>
 
 <Window>
 	<h1 slot="header">Add Player</h1>
 	<div slot="content" class="content">
-		<Input />
-		<Button onClick={addPlayer}>
-			<span class="add-player-btn">Add Player</span>
-		</Button>
+		<code>{JSON.stringify($playerStore)}</code>
+		<div class="new-player">
+			<input bind:value={nameInput} />
+			<Button onClick={() => playerStore.addPlayer({ photoUrl: '', nickname: nameInput })}>
+				<span class="add-player-btn">Add Player</span>
+			</Button>
+		</div>
 	</div>
 </Window>
 
@@ -20,5 +23,9 @@
 	.content {
 		display: flex;
 		padding: 16px;
+		flex-direction: column;
+	}
+	.new-player {
+		display: flex;
 	}
 </style>
