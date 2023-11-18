@@ -4,7 +4,7 @@
 	export let segmentCount: number = 15;
 	const segments = Array.from(Array(segmentCount).keys());
 
-	let counter = (0);
+	let counter = 0;
 	let clearTimer: NodeJS.Timeout;
 	$: {
 		clearInterval(clearTimer);
@@ -13,10 +13,10 @@
 
 	const isSegmentActive = (segmentIdx: number, segmentCounter: number) => {
 		if (segmentIdx > segmentCounter) {
-			segmentIdx-=segmentCount;
+			segmentIdx -= segmentCount;
 		}
 		return Math.abs(segmentIdx - segmentCounter) < 5;
-	}
+	};
 </script>
 
 <Window>
