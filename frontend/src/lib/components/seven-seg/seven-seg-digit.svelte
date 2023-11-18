@@ -22,7 +22,8 @@
 	const bitmaskInput = (inp: bigint | number) =>
 		typeof inp !== 'bigint' ? (inp = masks[Number(inp)] ?? undefined) : inp;
 
-	const sevSegOnClass = (inp: bigint | number, bitnr: bigint) => (bitmaskInput(inp) & (1n << bitnr) ? 'seg-on' : 'seg-off');
+	const sevSegOnClass = (inp: bigint | number, bitnr: bigint) =>
+		bitmaskInput(inp) & (1n << bitnr) ? 'seg-on' : 'seg-off';
 
 	const sevSegCssVars = `
         --seg-weight: ${digitWeight};
@@ -33,13 +34,13 @@
 </script>
 
 <div class="sev-seg-container" style={sevSegCssVars}>
-	<div class="sev-seg seg-h seg-0 {sevSegOnClass(input,0n)}" />
-	<div class="sev-seg seg-v seg-1 {sevSegOnClass(input,1n)}" />
-	<div class="sev-seg seg-v seg-2 {sevSegOnClass(input,2n)}" />
-	<div class="sev-seg seg-h seg-3 {sevSegOnClass(input,3n)}" />
-	<div class="sev-seg seg-v seg-4 {sevSegOnClass(input,4n)}" />
-	<div class="sev-seg seg-v seg-5 {sevSegOnClass(input,5n)}" />
-	<div class="sev-seg seg-h seg-6 {sevSegOnClass(input,6n)}" />
+	<div class="sev-seg seg-h seg-0 {sevSegOnClass(input, 0n)}" />
+	<div class="sev-seg seg-v seg-1 {sevSegOnClass(input, 1n)}" />
+	<div class="sev-seg seg-v seg-2 {sevSegOnClass(input, 2n)}" />
+	<div class="sev-seg seg-h seg-3 {sevSegOnClass(input, 3n)}" />
+	<div class="sev-seg seg-v seg-4 {sevSegOnClass(input, 4n)}" />
+	<div class="sev-seg seg-v seg-5 {sevSegOnClass(input, 5n)}" />
+	<div class="sev-seg seg-h seg-6 {sevSegOnClass(input, 6n)}" />
 </div>
 
 <style scoped>

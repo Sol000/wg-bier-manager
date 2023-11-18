@@ -12,9 +12,8 @@
 
 	let inputStr = (inp: number) => String(inp).padStart(digitCount, padZeroes ? '0' : ' ');
 
-	const digits = (inp: number): (bigint | number)[] =>  Array.from(inputStr(inp)).map((c) =>
-		c === ' ' ? 0n : parseInt(c)
-	);
+	const digits = (inp: number): (bigint | number)[] =>
+		Array.from(inputStr(inp)).map((c) => (c === ' ' ? 0n : parseInt(c)));
 </script>
 
 <div class="sev-seg-display" style="--sev-seg-height: {height}px">

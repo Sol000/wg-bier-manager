@@ -2,7 +2,6 @@
 	import ButtonLink from '$lib/components/button-link.svelte';
 	import Button from '$lib/components/button.svelte';
 	import Divider from '$lib/components/divider.svelte';
-	import LoadingWindow from '$lib/components/loading-window.svelte';
 	import SevenSegNum from '$lib/components/seven-seg/seven-seg-num.svelte';
 	import Window from '$lib/components/window.svelte';
 	import { playerStore } from '../stores/player';
@@ -36,10 +35,10 @@
 						<SevenSegNum input={player.seasonBeerCount} digitCount={4} />
 					</div>
 					<div class="operations">
-						<Button onClick={() => playerStore.increasePoints(player)}>
+						<Button onClick={() => seasonStore.increasePoints(player)}>
 							<div class="btn-txt incrementer">+</div>
 						</Button>
-						<Button onClick={() => playerStore.decreasePoints(player)}>
+						<Button onClick={() => seasonStore.decreasePoints(player)}>
 							<div class="btn-txt incrementer">-</div>
 						</Button>
 					</div>

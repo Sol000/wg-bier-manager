@@ -1,23 +1,10 @@
-import { getAllPlayers, increase, newPlayer, type Player } from '$lib/dataaccess';
+import { getAllPlayers, newPlayer, type Player } from '$lib/dataaccess';
 import { writable, type Writable } from 'svelte/store';
 
 export type PlayerStore = Writable<Player[] | undefined> & {
 	refreshPlayers: () => Promise<void>;
-	increasePoints: (player: Player) => Promise<void>;
-	decreasePoints: (player: Player) => Promise<void>;
 	addPlayer: (playerName: Pick<Player, 'nickname' | 'photoUrl'>) => Promise<void>;
 };
-
-const createBeerCountUpdater = (player: Player, delta: number) => (players: Player[] | undefined) =>
-	players?.map((p) =>
-		p.id !== player.id
-			? p
-			: {
-					...p,
-					overallBeerCount: p.overallBeerCount + delta,
-					seasonBeerCount: p.seasonBeerCount + delta
-			  }
-	);
 
 const createPlayerStore = (): PlayerStore => {
 	const store = writable<Player[] | undefined>(undefined);
@@ -28,20 +15,6 @@ const createPlayerStore = (): PlayerStore => {
 	return {
 		...store,
 		refreshPlayers,
-		increasePoints: async (player) => {
-			store.update(createBeerCountUpdater(player, +1));
-			const success = await increase(player);
-			if (!success) {
-				store.update(createBeerCountUpdater(player, -1));
-			}
-		},
-		decreasePoints: async (player) => {
-			store.update(createBeerCountUpdater(player, -1));
-			const success = await increase(player);
-			if (!success) {
-				store.update(createBeerCountUpdater(player, +1));
-			}
-		},
 		addPlayer: async (player) => {
 			const id = 'intermediateId';
 			store.update((players) => [
