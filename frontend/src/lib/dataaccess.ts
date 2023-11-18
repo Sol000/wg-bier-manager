@@ -18,8 +18,11 @@ export interface Season {
 	playerList: Player[];
 }
 
-export const loadCurrentSeason = async (fet = fetch): Promise<Season> => {
+export const loadCurrentSeason = async (fet = fetch): Promise<Season | undefined> => {
 	const res = await fet(dataUrl(`/season`));
+	if (res.status === 204) {
+		return undefined;
+	}
 	if (res.status !== 200) {
 		throw new Error('Could not get current season!');
 	}
@@ -51,8 +54,13 @@ export const newPlayer = async (player: Pick<Player, 'nickname' | 'photoUrl'>, f
 	return result.status === 200;
 };
 
-export const getAllPlayers = async (fet = fetch): Promise<Player[]> =>
-	(await fet(dataUrl(`/player/all`))).json();
+export const getAllPlayers = async (fet = fetch): Promise<Player[]> => {
+	const res = await fet(dataUrl(`/player/all`));
+	if (res.status === 200) {
+		return res.json();
+	}
+	return [];
+};
 
 export const nextSeason = async (
 	seasonValue: number,

@@ -1,7 +1,7 @@
 import { loadCurrentSeason, nextSeason, type Player, type Season } from '$lib/dataaccess';
-import { writable, type Readable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
-export type SeasonStore = Readable<Season | undefined> & {
+export type SeasonStore = Writable<Season | undefined> & {
 	refreshSeason: () => Promise<void>;
 	nextSeason: (seasonValue: number, tips: number, nextSeasonPlayerList: Player[]) => Promise<void>;
 };
@@ -14,7 +14,7 @@ const createSeasonStore = (): SeasonStore => {
 		store.set(season);
 	};
 	return {
-		subscribe: store.subscribe,
+		...store,
 		refreshSeason,
 		nextSeason: async (seasonValue, tips, nextSeasonPlayerList) => {
 			const id = 'intermediateId';

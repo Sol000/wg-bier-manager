@@ -1,9 +1,25 @@
 <script lang="ts">
+	import ErrorWindow from '$lib/components/error-window.svelte';
+	import LoadingWindow from '$lib/components/loading-window.svelte';
+	import { getAllPlayers, loadCurrentSeason } from '$lib/dataaccess';
+	import { playerStore } from '../stores/player';
+	import { seasonStore } from '../stores/season';
+
+	const dataReady = Promise.all([
+		loadCurrentSeason().then(seasonStore.set),
+		getAllPlayers().then(playerStore.set)
+	]);
 </script>
 
 <div class="container">
 	<div class="content">
-		<slot />
+		{#await dataReady}
+			<LoadingWindow />
+		{:then}
+			<slot />
+		{:catch error}
+			<ErrorWindow {error} />
+		{/await}
 	</div>
 </div>
 

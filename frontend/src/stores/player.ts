@@ -1,7 +1,7 @@
 import { getAllPlayers, increase, newPlayer, type Player } from '$lib/dataaccess';
-import { writable, type Readable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
-export type PlayerStore = Readable<Player[] | undefined> & {
+export type PlayerStore = Writable<Player[] | undefined> & {
 	refreshPlayers: () => Promise<void>;
 	increasePoints: (player: Player) => Promise<void>;
 	decreasePoints: (player: Player) => Promise<void>;
@@ -26,8 +26,8 @@ const createPlayerStore = (): PlayerStore => {
 		store.set(players);
 	};
 	return {
+		...store,
 		refreshPlayers,
-		subscribe: store.subscribe,
 		increasePoints: async (player) => {
 			store.update(createBeerCountUpdater(player, +1));
 			const success = await increase(player);

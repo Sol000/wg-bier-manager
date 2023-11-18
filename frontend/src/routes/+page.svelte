@@ -10,13 +10,12 @@
 </script>
 
 {#if $seasonStore === undefined}
-	<LoadingWindow />
-	<Button
-		onClick={() => {
-			playerStore.refreshPlayers();
-			seasonStore.refreshSeason();
-		}}>Refresh</Button
-	>
+	<Window>
+		<div slot="content" class="no-season-content">
+			<h1>There is no season yet!</h1>
+			<ButtonLink href="/season">Create</ButtonLink>
+		</div>
+	</Window>
 {:else}
 	<Window>
 		<div slot="header" class="season-heading">
@@ -104,5 +103,11 @@
 	}
 	.footer {
 		display: flex;
+	}
+	.no-season-content {
+		padding: 32px;
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
 	}
 </style>
