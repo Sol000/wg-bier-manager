@@ -1,4 +1,4 @@
-import { loadCurrentSeason, nextSeason, type Player, type Season } from '$lib/dataaccess';
+import { increase, loadCurrentSeason, nextSeason, type Player, type Season } from '$lib/dataaccess';
 import { writable, type Writable } from 'svelte/store';
 
 export type SeasonStore = Writable<Season | undefined> & {
@@ -33,9 +33,17 @@ const createSeasonStore = (): SeasonStore => {
 		refreshSeason,
 		increasePoints: async (player) => {
 			store.update(createBeerCountUpdater(player, +1));
+			const success = await increase(player);
+			if (!success) {
+				store.update(createBeerCountUpdater(player, -1));
+			}
 		},
 		decreasePoints: async (player) => {
 			store.update(createBeerCountUpdater(player, -1));
+			const success = await increase(player);
+			if (!success) {
+				store.update(createBeerCountUpdater(player, +1));
+			}
 		},
 		nextSeason: async (seasonValue, tips, nextSeasonPlayerList) => {
 			const id = 'intermediateId';
