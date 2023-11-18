@@ -3,6 +3,18 @@ body {
 	height: 100vh;
 	margin: 0;
 
+	--color-10: #ffffff;
+	--color-9: #becdb9;
+	--color-8: #a4b99d;
+	--color-7: #89a580;
+	--color-6: #708f65;
+	--color-5: #597251;
+	--color-4: #43553d;
+	--color-3: #2c3928;
+	--color-2: #161c14;
+	--color-1: #030403;
+	--color-0: #000000;
+
 	--text-color: #d6dfd2;
 	--text-color-emphasized: #75956a;
 
