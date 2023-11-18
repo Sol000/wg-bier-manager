@@ -1,12 +1,14 @@
 <script lang="ts">
-	import Button from '$lib/components/button.svelte';
+	import ButtonLink from '$lib/components/button-link.svelte';
+import Button from '$lib/components/button.svelte';
+	import Heading from '$lib/components/heading.svelte';
 	import Window from '$lib/components/window.svelte';
 	import { playerStore } from '../../stores/player';
 	import { seasonStore } from '../../stores/season';
 </script>
 
 <Window>
-	<h1 slot="header">New Season</h1>
+	<Heading slot="header">New Season</Heading>
 	<div slot="content" class="content">
 		<Button
 			onClick={() =>
@@ -15,10 +17,11 @@
 			Create season with all players ({$playerStore?.length})
 		</Button>
 	</div>
+	<ButtonLink slot="footer" href="/">Home</ButtonLink>
 </Window>
 
 <style scoped>
 	.content {
-		padding: 32px;
+		padding: var(--spacing-l);
 	}
 </style>

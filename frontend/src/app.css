@@ -18,6 +18,7 @@ body {
 	--text-color: #d6dfd2;
 	--text-color-emphasized: #75956a;
 
+	--border-width: 4px;
 	--border-bright: #6a865f;
 	--border-dark: #232d20;
 	--border-divider: #3b4b35;
@@ -25,4 +26,8 @@ body {
 	--background-page: #0c0f0b;
 	--background-surface: #2f3c2a;
 	--background-container: #0c0f0b;
+
+	--spacing-l: 16px;
+	--spacing-m: 8px;
+	--spacing-s: 4px;
 }

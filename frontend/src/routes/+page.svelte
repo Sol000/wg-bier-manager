@@ -2,37 +2,29 @@
 	import ButtonLink from '$lib/components/button-link.svelte';
 	import Button from '$lib/components/button.svelte';
 	import Divider from '$lib/components/divider.svelte';
+	import Heading from '$lib/components/heading.svelte';
 	import SevenSegNum from '$lib/components/seven-seg/seven-seg-num.svelte';
 	import Window from '$lib/components/window.svelte';
-	import { playerStore } from '../stores/player';
 	import { seasonStore } from '../stores/season';
 </script>
 
 {#if $seasonStore === undefined}
 	<Window>
 		<div slot="content" class="no-season-content">
-			<h1>There is no season yet!</h1>
+			<Heading>There is no season yet!</Heading>
 			<ButtonLink href="/season">Create</ButtonLink>
 		</div>
 	</Window>
 {:else}
 	<Window>
-		<div slot="header" class="season-heading">
-			<h1>&gt; Season~{$seasonStore.number}</h1>
-			<Button
-				onClick={() => {
-					playerStore.refreshPlayers();
-					seasonStore.refreshSeason();
-				}}>Refresh</Button
-			>
-		</div>
-		<div slot="content">
-			{#each $seasonStore.playerList as player, idx}
+		<Heading slot="header">&gt; Season~{$seasonStore.number}</Heading>
+
+		<div slot="content" >
+			{#each $seasonStore.playerList as player}
 				<div class="scoreboard-entry">
-					<span class="place">{idx + 1}. </span>
-					<span class="player-label">{player.nickname}</span>
+					<h3 class="player-label">{player.nickname}</h3>
 					<div class="score">
-						<SevenSegNum input={player.seasonBeerCount} digitCount={4} />
+						<SevenSegNum height={32} input={player.seasonBeerCount} digitCount={4} />
 					</div>
 					<div class="operations">
 						<Button onClick={() => seasonStore.increasePoints(player)}>
@@ -46,7 +38,7 @@
 				<Divider />
 			{/each}
 		</div>
-		<div slot="footer">
+		<div slot="footer" class="footer">
 			<ButtonLink href="/players">
 				<div class="btn-txt new-player-btn-content">Add a new Player</div>
 			</ButtonLink>
@@ -58,15 +50,11 @@
 {/if}
 
 <style scoped>
-	.season-heading {
-		display: flex;
-		justify-content: space-between;
-	}
 	.scoreboard-entry {
 		display: flex;
 		align-items: center;
-		gap: 16px;
-		padding: 16px;
+		gap: var(--spacing-s);
+		padding: var(--spacing-s);
 	}
 	.score {
 		border-width: 4px;
@@ -77,36 +65,24 @@
 	.player-label {
 		flex: 1;
 		color: var(--text-color);
-		font-size: 32px;
-	}
-
-	.place {
-		color: var(--text-color-emphasized);
-		font-size: 32px;
-	}
-	.btn-txt {
-		font-size: 32px;
-		margin: 4px;
 	}
 	.incrementer {
-		width: 32px;
-		height: 32px;
+		padding: 4px 8px;
 	}
 	.operations {
 		display: flex;
 		flex-direction: column;
-		gap: 16px;
+		gap: var(--spacing-s);
 	}
-	.new-player-btn-content {
-		margin: 8px 32px;
-	}
+
 	.footer {
 		display: flex;
+		justify-content: space-between;
 	}
 	.no-season-content {
-		padding: 32px;
+		padding: var(--spacing-s);
 		display: flex;
 		flex-direction: column;
-		gap: 32px;
+		gap: var(--spacing-s);
 	}
 </style>

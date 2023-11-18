@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Window from './window.svelte';
+	import Heading from "./heading.svelte";
 
 	export let segmentCount: number = 15;
 	const segments = Array.from(Array(segmentCount).keys());
@@ -20,7 +21,7 @@
 </script>
 
 <Window>
-	<h1 slot="header">Loading...</h1>
+	<Heading slot="header">Loading...</Heading>
 	<div slot="content" class="loading-indicator">
 		{#each segments as segment, idx}
 			<div class="segment segment-{isSegmentActive(idx, counter) ? 'active' : 'inactive'}" />
@@ -31,11 +32,11 @@
 <style scoped>
 	.loading-indicator {
 		display: flex;
-		padding: 8px;
-		gap: 8px;
+		padding: var(--spacing-s);
+		gap: var(--spacing-s);
 	}
 	.segment {
-		height: 64px;
+		height: 32px;
 		flex: 1;
 	}
 	.segment-active {

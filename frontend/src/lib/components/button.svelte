@@ -8,7 +8,7 @@
 
 <style scoped>
 	.btn {
-		border-width: 4px;
+		border-width: var(--border-width);
 		border-color: var(--border-bright) var(--border-dark) var(--border-dark) var(--border-bright);
 		border-style: solid;
 		background-color: var(--background-surface);
