@@ -10,15 +10,15 @@
 	export let digitCount: number;
 	export let padZeroes = false;
 
-	let inputStr = String(input).padStart(digitCount, padZeroes ? '0' : ' ');
+	let inputStr = (inp: number) => String(inp).padStart(digitCount, padZeroes ? '0' : ' ');
 
-	const digits: (bigint | number)[] = Array.from(inputStr).map((c) =>
+	const digits = (inp: number): (bigint | number)[] =>  Array.from(inputStr(inp)).map((c) =>
 		c === ' ' ? 0n : parseInt(c)
 	);
 </script>
 
 <div class="sev-seg-display" style="--sev-seg-height: {height}px">
-	{#each digits as digit}
+	{#each digits(input) as digit}
 		<div class="digit">
 			<SevenSegDigit
 				digitWeight="{height / 20}px"
