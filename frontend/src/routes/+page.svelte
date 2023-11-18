@@ -19,7 +19,7 @@
 	<Window>
 		<Heading slot="header">&gt; Season~{$seasonStore.number}</Heading>
 
-		<div slot="content" >
+		<div slot="content">
 			{#each $seasonStore.playerList as player}
 				<div class="scoreboard-entry">
 					<h3 class="player-label">{player.nickname}</h3>

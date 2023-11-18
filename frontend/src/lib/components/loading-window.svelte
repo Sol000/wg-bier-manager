@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Window from './window.svelte';
-	import Heading from "./heading.svelte";
+	import Heading from './heading.svelte';
 
 	export let segmentCount: number = 15;
 	const segments = Array.from(Array(segmentCount).keys());

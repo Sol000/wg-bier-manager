@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ButtonLink from '$lib/components/button-link.svelte';
-import Button from '$lib/components/button.svelte';
+	import Button from '$lib/components/button.svelte';
 	import Heading from '$lib/components/heading.svelte';
 	import Window from '$lib/components/window.svelte';
 	import { playerStore } from '../../stores/player';
