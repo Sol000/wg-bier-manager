@@ -1,5 +1,6 @@
 FROM oven/bun
 COPY . .
 RUN bun install
- 
-CMD ["bun", "dev", "--host"]
+RUN bun run build
+
+CMD ["bun", "./build/index.js"]
