@@ -3,4 +3,5 @@ COPY . .
 RUN bun install
 RUN bun run build
 
-CMD ["bun", "./build/index.js"]
+ENTRYPOINT [ "bun" ]
+CMD [ "./build/index.js"]

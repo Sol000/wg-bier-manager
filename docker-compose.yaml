@@ -5,17 +5,35 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data_container:/data/db
-
+    profiles:
+      - prod
+      - local
       
   backend:
     build: ./backend/
     ports:
       - "8080:8080"
+    profiles:
+      - prod
+      - local
 
   frontend:
     build: ./frontend/
     ports:
-      - "5173:5173"
+      - "3000:3000"
+    environment:
+      - ORIGIN=https://wg84a.at
+    profiles:
+      - prod
+
+  frontend-local:
+    build: ./frontend/
+    ports:
+      - "3000:3000"
+    environment:
+      - ORIGIN=http://localhost
+    profiles:
+      - local
 
   nginx:
     image: nginx
@@ -27,6 +45,15 @@ services:
       - /etc/ssl:/etc/ssl
     profiles:
       - prod
+
+  nginx-local:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/local:/etc/nginx/conf.d
+    profiles:
+      - local
 
 volumes:
   mongodb_data_container:
