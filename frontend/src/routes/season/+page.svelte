@@ -17,11 +17,18 @@
 			Create season with all players ({$playerStore?.length})
 		</Button>
 	</div>
-	<ButtonLink slot="footer" href="/">Home</ButtonLink>
+	<div slot="footer" class="footer">
+		<ButtonLink href="/">Home</ButtonLink>
+		<ButtonLink href="/players">Players</ButtonLink>
+	</div>
 </Window>
 
 <style scoped>
 	.content {
 		padding: var(--spacing-l);
+	}
+	.footer {
+		display: flex;
+		justify-content: space-between;
 	}
 </style>
