@@ -16,6 +16,5 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd wg-bier-manager/ &&
-            docker compose down -v &&
             git pull &&
             ./run.sh --prod
