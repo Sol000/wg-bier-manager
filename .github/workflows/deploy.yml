@@ -16,5 +16,5 @@ jobs:
           git-clone-by: https
           target-branch: main
           target-directory: /root/wg-bier-manager
-          pre-command: cd $TARGET_DIRECTORY && docker compose down -v --remove-orphans
+          pre-command: cd /root/wg-bier-manager && docker compose down -v --remove-orphans
           post-command: ./run.sh --prod 
