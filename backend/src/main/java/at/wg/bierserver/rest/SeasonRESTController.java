@@ -4,6 +4,7 @@ import at.wg.bierserver.data.*;
 import at.wg.bierserver.dataaccess.PlayerRepo;
 import at.wg.bierserver.dataaccess.SeasonRepo;
 import at.wg.bierserver.dataaccess.SeasonsFinRepo;
+import at.wg.bierserver.exception.EmptyListException;
 import at.wg.bierserver.logic.Calculation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -64,6 +65,9 @@ public class SeasonRESTController {
             // ---------- prepare new season -----------------
             // calculate new number
             DataSeasionMinimal current = list.getFirst();
+            if (data.getNextSeasonPlayerList().isEmpty()){
+                throw new EmptyListException();
+            }
             DataSeasionMinimal newSeason = new DataSeasionMinimal(current.getNumber() + 1, new Date(), data.getNextSeasonPlayerList());
 
             // get current playerlist
@@ -131,6 +135,8 @@ public class SeasonRESTController {
             // save initial season
             seasonRepo.insert(newSeason);
             return HttpStatus.OK;
+        } catch (EmptyListException e) {
+            return HttpStatus.BAD_REQUEST;
         }
     }
     @GetMapping("/finished/all")
