@@ -1,20 +1,21 @@
-name: Deploy bier manager
+name: 'update wg-bier-manager'
 
 on:
   push:
     branches: [main]
-
+    
 jobs:
-  deploy:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: Rxinui/ssh-deploy-repo-action@v1.1
+      - uses: Core2Goal/ssh-action@v1
         with:
-          ssh-user: root
-          ssh-password: ${{ secrets.SSH_PASSWORD }}
-          ssh-domain: ${{ secrets.SSH_DOMAIN }}
-          git-clone-by: https
-          target-branch: main
-          target-directory: /root/wg-bier-manager
-          pre-command: cd /root/wg-bier-manager && docker compose down -v --remove-orphans
-          post-command: ./run.sh --prod 
+          host: ${{ secrets.SSH_DOMAIN }}
+          port: 22
+          username: ${{ secrets.SSH_USERNAME }}
+          ppassword: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd wg-bier-manager/ &&
+            docker compose down -v &&
+            git pull main &&
+            ./run.sh --prod
