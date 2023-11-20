@@ -17,5 +17,5 @@ jobs:
           script: |
             cd wg-bier-manager/ &&
             docker compose down -v &&
-            git pull main &&
+            git pull &&
             ./run.sh --prod
