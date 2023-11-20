@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses Rxinui/ssh-deploy-repo-action@v1
+      - uses Rxinui/ssh-deploy-repo-action@v1.1
         with:
           ssh-user: root
           ssh-password: ${{ secrets.SSH_PASSWORD }}
