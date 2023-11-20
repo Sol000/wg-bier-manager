@@ -1,0 +1,18 @@
+name: Deploy bier manager
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses Rxinui/ssh-deploy-repo-action@v1
+        with:
+          ssh-user: root
+          ssh-password: ${{ secrets.SSH_PASSWORD }}
+          ssh-domain: ${{ secrets.SSH_DOMAIN }}
+          git-clone-by: https
+          target-branch: main
+          target-directory: /root
