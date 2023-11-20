@@ -1,26 +1,20 @@
 ___
-## Quick Guide:
-
 ### Prerequesits
-- nodejs
-- [bun](https://bun.sh/)
-- docker + compose plugin (Docker Desktop is nice to have)
-- openjdk-21
-- gradle > 6.0
+to install all the dependencies run:
+    
+    python3 run.py --setup
 
-### Starting the application
+### Starting the APP
 
 #### On Server
-    chmod +x run.sh
-    ./run.sh --prod
+    python3 run.py --prod
 
-> for hard reset (erases DB) use `./run.sh --prod --hard-reset`
+#### Locally (without Nginx)
+    python3 run.py --local
 
-#### Locally (without Ngingx)
-    chmod +x run.sh
-    ./run.sh 
+> To reset the database service add the `--hard-reset` flag to an starting command 
 
-### Port-Mapping
+### Port-Mapping in docker-env
 mongodb --> `27017` \
 backend ----> `8080` \
 frontend ----> `5173` \

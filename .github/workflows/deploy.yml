@@ -17,4 +17,4 @@ jobs:
           script: |
             cd wg-bier-manager/ &&
             git pull &&
-            ./run.sh --prod
+            python3 run.py -p
