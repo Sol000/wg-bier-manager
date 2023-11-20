@@ -16,4 +16,5 @@ jobs:
           git-clone-by: https
           target-branch: main
           target-directory: /root/wg-bier-manager
+          pre-command: docker compose down && rm -r /root/wg-bier-manager
           post-command: ./run.sh --prod
