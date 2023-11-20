@@ -16,3 +16,5 @@ jobs:
           git-clone-by: https
           target-branch: main
           target-directory: /root
+          pre-command: cd $TARGET_DIRECTORY
+          post-command: ./run.sh --prod
