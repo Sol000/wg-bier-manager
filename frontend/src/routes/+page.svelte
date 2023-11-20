@@ -17,7 +17,7 @@
 	</Window>
 {:else}
 	<Window>
-		<Heading slot="header">&gt; Season~{$seasonStore.number} <3</Heading>
+		<Heading slot="header">&gt; Season~{$seasonStore.number} &lt;3</Heading>
 
 		<div slot="content">
 			{#each $seasonStore.playerList as player}
