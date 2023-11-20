@@ -24,4 +24,4 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install java 21.0.1-tem
 sdk install gradle 8.4
 
-
+source ~/.bashrc
