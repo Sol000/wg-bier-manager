@@ -1,6 +1,6 @@
 import {
 	increase,
-	decreasee,
+	decrease,
 	loadCurrentSeason,
 	nextSeason,
 	type Player,
@@ -23,7 +23,7 @@ const createBeerCountUpdater =
 		}
 		const playerToUpdate = season.playerList.find((p) => p.id === player.id);
 		if (playerToUpdate) {
-			playerToUpdate.overallBeerCount += delta;
+			playerToUpdate.overallBeerCount += delta; // TODO: Das machen wir schon im backend
 			playerToUpdate.seasonBeerCount += delta;
 		}
 		return { ...season };
@@ -47,7 +47,7 @@ const createSeasonStore = (): SeasonStore => {
 		},
 		decreasePoints: async (player) => {
 			store.update(createBeerCountUpdater(player, -1));
-			const success = await decreasee(player);
+			const success = await decrease(player);
 			if (!success) {
 				store.update(createBeerCountUpdater(player, +1));
 			}
