@@ -38,7 +38,7 @@ export const increase = async (player: Player, fet = fetch): Promise<boolean> =>
 	return result.status === 200;
 };
 
-export const decreasee = async (player: Player, fet = fetch): Promise<boolean> => {
+export const decrease = async (player: Player, fet = fetch): Promise<boolean> => {
 	const result = await fet(dataUrl(`/player/count-down?id=${player.id}`));
 	return result.status === 200;
 };
