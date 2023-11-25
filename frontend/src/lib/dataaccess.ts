@@ -18,6 +18,22 @@ export interface Season {
 	playerList: Player[];
 }
 
+export interface FinishedSeason{
+	id: string;
+	number: number;
+	begin: Date;
+	end: Date;
+	result: ArrayLike<{}>
+	winner: string;
+	seasonValue: number;
+	tips: number;
+	invoice: {};
+}
+
+export interface CalcPerPlayer{
+	{};
+}
+
 export const loadCurrentSeason = async (fet = fetch): Promise<Season | undefined> => {
 	const res = await fet(dataUrl(`/season`));
 	if (res.status === 204) {
@@ -80,4 +96,12 @@ export const nextSeason = async (
 		})
 	});
 	return result.status === 200;
+};
+
+export const getAllFinishedSeasons = async (fet = fetch): Promise<FinishedSeason[]> => {
+	const res = await fet(dataUrl(`/season/finished/all`));
+	if (res.status === 200) {
+		return res.json();
+	}
+	return [];
 };

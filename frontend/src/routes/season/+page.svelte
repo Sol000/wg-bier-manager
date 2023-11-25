@@ -67,6 +67,7 @@
 	</div>
 	<div slot="footer" class="footer">
 		<ButtonLink href="/">Home</ButtonLink>
+		<ButtonLink href="/invoice">current Invoice</ButtonLink>
 		<ButtonLink href="/players">Players</ButtonLink>
 	</div>
 </Window>
